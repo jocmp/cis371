@@ -1,0 +1,23 @@
+body {
+  /* make the body of page have the font times, medium, black */
+  margin-top: 2em;
+  margin-left: 4em;
+  font-family: Times, serif;
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subtitle {
+  font-style: italic;
+}
+
+.right {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}

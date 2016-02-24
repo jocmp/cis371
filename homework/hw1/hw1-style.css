@@ -1,0 +1,95 @@
+body {
+  /* make the body of page have the font times, medium, black */
+  font-family: Times, serif;
+  font-size: medium;
+  color: black;
+}
+
+a {
+  /* hyperlinks are to be in red... */
+  color: red;
+}
+
+a:visited {
+  /* ... and turn green after having been visited */
+  color: green;
+}
+
+div {
+  /* Non-requirements */
+  padding: 1em;
+}
+
+table {
+  /* margin of table should be 2px */
+  margin: 2px;
+  /* Non-requirements */
+  width: 100%;
+}
+
+table p {
+  /* for paragraphs within tables set the font size to small */
+  font-size: small;
+}
+
+table table {
+  /* margin of table within table should be 1px */
+  margin: 1px;
+  border: 1px solid gray;
+}
+
+ul {
+  /* unordered lists must be in blue */
+  color: blue;
+}
+
+.page-intro {
+  float: left;
+  margin-left: 1em;
+}
+
+div.odd {
+  /* div with a class of "odd" should have gray background */
+  background-color: gray;
+}
+
+p.best {
+  /* text with a paragraph with a class of "best" is italicized */
+  font-style: italic;
+}
+
+span.list-intro {
+  font-weight: bold;
+}
+
+div.links {
+  font-family: sans-serif;
+}
+
+#page-title {
+  margin-left: 1em;
+  display: block;
+}
+
+#josiah {
+  /* place a picture of yourself so that it
+  appears on the right side of the page */
+  float: right;
+}
+
+#course-table th, #course-table td {
+  /* Non-requirement */
+  border: 1px solid gray;
+}
+
+img#josiah {
+  width: 9.375em;
+  height: 9.375em;
+  margin: 1em;
+}
+
+img#inspiration {
+  /* Non-requirement */
+  width: 19.6875em;
+  height: 11.025em;
+}

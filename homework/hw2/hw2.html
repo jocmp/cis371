@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>(campbjos) CIS371 HW2</title>
+  <link rel="icon" href="//cis.gvsu.edu/~campbjos/ico.png" type="image/png">
+  <link rel="stylesheet" href="hw2-style.css">
+  <script>
+    var questions = [
+      {qno: 1, q: "Which has the highest mountain, Earth or Mars?",
+      ans:"Mars", u_ans:null},
+      {qno: 2, q:"What is the currency of Switzerland?",
+      ans: "Franc", u_ans:null},
+      {qno: 3, q:"Which US state capital ends in 'x'?",
+      ans: "Phoenix", u_ans:null},
+      {qno: 4, q:"What is infant whale commonly called?",
+      ans: "Calf", u_ans:null},
+      {qno: 5, q:"Which hills divide England from Scotland?",
+       ans: "Cheviots", u_ans:null},
+      {qno: 6,
+        q:"In Roman mythology, Neptune is the equivalent to which Greek god?",
+        ans: "Poseidon", u_ans:null}
+    ]
+
+    function promptUser(index, question) {
+      var answer = prompt(question.q);
+      if (answer != null) {
+        question.u_ans = answer.toLowerCase();
+        document.cookie = "q".concat(index) + "=" + question.u_ans;
+        return true;
+      }
+      return false;
+    }
+
+    function getUserAnswers() {
+      var index;
+      for(index = 0; index < 6; index++) {
+        questions[index].u_ans = getCookie("q".concat(index));
+      }
+    }
+
+    function showCorrectAnswers() {
+      for (var k = 0; k < questions.length; k++) {
+        var question = questions[k];
+        var userSpan = "";
+        var answerSpan = "";
+        if (question.u_ans === question.ans.toLowerCase()) {
+          userSpan = "<span class=\"right\">" + question.u_ans + "</span>";
+        } else {
+          userSpan = "<span class=\"wrong\">" + question.u_ans + "</span>";
+        }
+        answerSpan = "<span class=\"right\">" + question.ans + "</span>";
+        document.write("<p><span class=\"bold\">Question " + (k + 1)
+          + ": </span>"+ question.q + "<br/>");
+        document.write("Your answer: ");
+        document.write(userSpan + "<br/>");
+        document.write("Correct answer: ");
+        document.write(answerSpan + "</p>");
+      }
+    }
+
+    function getCookie(cookieName) {
+        var name = cookieName + "=";
+        var cookieArray = document.cookie.split(';');
+        for(var i = 0; i < cookieArray.length; i++) {
+            var found = cookieArray[i];
+            while (found.charAt(0) == ' ') {
+              found = found.substring(1);
+            }
+            if (found.indexOf(name) == 0) {
+              return found.substring(name.length, found.length);
+            }
+        }
+        return null;
+    }
+
+    function main() {
+      getUserAnswers();
+      // Increment the amount of questions answered
+      var answered = 0;
+      // Increment the amount of correct answers
+      var correct = 0;
+      for (var i = 0; i < questions.length; i++) {
+        var question = questions[i];
+        var input = true;
+        if (question.u_ans != null) {
+          document.write("Question " + (i + 1)
+            + " answer: " + question.u_ans  + "<br />");
+        } else {
+          input = promptUser(i, question);
+          if (input) {
+            document.write("Question " + (i + 1)
+              + " answer: " + question.u_ans  + "<br />");
+          } else {
+            break;
+          }
+        }
+        if (question.u_ans === question.ans.toLowerCase()) {
+          correct++;
+        }
+        answered++;
+      }
+      if (answered == 6) {
+        alert("You scored " + correct + " out of " + questions.length);
+        document.write("<h3>Results</h3>");
+        showCorrectAnswers();
+      }
+    }
+  </script>
+</head>
+<body>
+  <h3>The World's Quickest Quiz</h3>
+  <p class="subtitle">Created by Josiah Campbell</p>
+  <script type="text/javascript">
+    main();
+  </script>
+  <p><a href="hw2-clear.html">Clear cookies</a></p>
+</body>
+</html>

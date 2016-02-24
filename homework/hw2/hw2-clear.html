@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <title>(campbjos) CIS371 HW2</title>
+  <link rel="icon" href="//cis.gvsu.edu/~campbjos/ico.png" type="image/png">
+  <link rel="stylesheet" href="hw2-style.css">
+  <script>
+    function deleteCookies() {
+      for (var i = 0; i < 6; i++) {
+        var cookieName = "q".concat(i);
+        var expireDate = "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        var path = ";path=hw2.html";
+        document.cookie = cookieName + expireDate + path;
+      }
+      document.write("<p>Cookies cleared.</p>")
+    }
+  </script>
+</head>
+<body>
+    <h3>The World's Quickest Quiz</h3>
+    <script type="text/javascript">
+      deleteCookies();
+    </script>
+    <a href="hw2.html">Go back</a>
+</body>
+</html>
