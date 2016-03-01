@@ -9,9 +9,14 @@
 	<p class="subtitle">Created by Database Admin Josiah Campbell</p>
 	<?php
 		require 'hw5.inc';
-		splitFile();
+        if ($_COOKIE["uploaded"] != 1) {
+            splitFile();
+	        echo "<p>The data has been uploaded from your file.</p>";
+            setcookie("uploaded", 1);
+        } else {
+            echo "<p>Data has already been uploaded.</p>";
+        }
 	?>
-	<p>The data has been been uploaded from your file.</p>
 	<p><a href="hw5.html">Go home</a></p>
 </body>
 </html>

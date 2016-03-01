@@ -15,7 +15,8 @@
 		require 'hw5.inc';
 		addFriend($firstName, $lastName, $phone, $age);
 	?>
-	<p>Thanks, <?php echo $firstName; ?>. The data has been received.</p>
+        <p>Thank you. <?php echo "{$firstName} {$lastName}" ?> 
+                has been added to the database.</p>
 	<p><a href="hw5.html">Go home</a></p>
 </body>
 </html>

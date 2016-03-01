@@ -9,8 +9,9 @@
 	<p class="subtitle">Created by Database Admin Josiah Campbell</p>
 	<?php
 		require 'hw5.inc';
-		echo getFriendTable();
+		createTables();
 	?>
-	<p><a href="hw5.html">Go home</a></p>
+    <p>"Friends" table generated.</p>
+    <p><a href="hw5.html">Go home</a></p>
 </body>
 </html>
