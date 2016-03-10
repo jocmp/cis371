@@ -1,0 +1,31 @@
+body {
+  margin-top: 2em;
+  margin-left: 4em;
+  margin-right: 4em;
+  font-family: Times, serif;
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subtitle {
+  font-style: italic;
+}
+
+table {
+  margin-top: 1em;
+  margin-right: 4em;
+}
+
+table, th {
+    border: 0.063em solid black;
+}
+
+th, td {
+  border: 0.063em solid black;
+  padding: 0.25em;
+  text-align: center;
+
+}
