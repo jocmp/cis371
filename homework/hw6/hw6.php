@@ -10,24 +10,14 @@
     foreach ($companies as $company) {
         // Create elements
         $company_root = $dom->createElement('company');
-        $year = $dom->createElement('year');
-        $rank = $dom->createElement('rank');
-        $revenue = $dom->createElement('revenue');
-        $profit = $dom->createElement('profit');
-        $name = $dom->createElement('name');
-        // Append children
         $root->appendChild($company_root); 
-        $company_root->appendChild($year);
-        $company_root->appendChild($rank);
-        $company_root->appendChild($revenue);
-        $company_root->appendChild($profit);
-        $company_root->appendChild($name);
-        // Append child node information  
-        $year->appendChild($dom->createTextNode($company["Year"]));
-        $rank->appendChild($dom->createTextNode($company["Rank"]));
-        $revenue->appendChild($dom->createTextNode($company["Revenue"]));
-        $profit->appendChild($dom->createTextNode($company["Profit"]));
-        $name->appendChild($dom->createTextNode($company["Company"]));
+        foreach ($company as $elem => $value) {
+            $company_elem = $dom->createElement($elem);
+            // Append children
+            $company_root->appendChild($company_elem);
+            // Append child node information 
+            $company_elem->appendChild($dom->createTextNode($value));
+        }
     }
     echo $dom->saveHTML();
     
