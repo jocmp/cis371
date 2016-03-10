@@ -21,7 +21,6 @@ function create_dom() {
         }
     }
     echo $dom->saveHTML();
-
 }
 
 function get_companies() {
