@@ -1,0 +1,43 @@
+<html>
+<head>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+</head>
+<body>
+<div class="div1">
+	<p id="favCharText">favorite cartoon character</p>
+	<img id="favChar"/>
+	<script>
+		$('#favCharText').click(function(){
+			if($('#favChar').attr('src')=="homer.jpeg")
+				$('#favChar').attr({
+					src:"bart.jpeg",
+					alt:"bart simpson"
+				});
+			else
+				$('#favChar').attr({
+					src:"homer.jpeg",
+					alt:"homer simpson"
+				});
+		});
+	</script>
+</div>
+<div class="div2">
+	<form action="notArealUrl.php" method="GET">
+		<p>What is a female cattle?</p>
+		<input id="answer" type="text"></input>
+		<input id="subAns" type="submit" value="guess"/>
+	</form>
+	<script>//try it without the 'return false'
+		$('#subAns').click(function(){
+			if($('#answer').val()=="cow")
+				alert("you're right");
+			else
+				alert("you're wrong");
+			return false;
+		});
+	</script>
+</div>
+</body>
+</html>

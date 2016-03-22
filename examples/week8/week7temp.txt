@@ -1,0 +1,12 @@
+examples
+x	get some data and alert it
+x	get some data and insert it
+x	get data using parameters GET
+x	get data using parameters POST
+x	multiple requests - array of xmlHTTPrequest objects
+x	multiple requests using classes
+x	imbedding html
+x	processing xml
+x	imbedding xml using xsl
+	forms without action attributes - using js
+	

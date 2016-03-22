@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>week 5 example</title>
+
+	<script language = "javascript">
+		var XMLHttpRequestObject = false;
+
+		if (window.XMLHttpRequest) {
+			XMLHttpRequestObject = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			XMLHttpRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		function getData(dataSource, divID, param)
+		{
+			if(XMLHttpRequestObject) {
+				var obj = document.getElementById(divID);
+				XMLHttpRequestObject.open("GET", dataSource);
+
+				XMLHttpRequestObject.onreadystatechange = function()
+				{
+					if (XMLHttpRequestObject.readyState == 4 &&
+						XMLHttpRequestObject.status == 200) {
+							obj.innerHTML = XMLHttpRequestObject.responseText;
+					}
+				}
+
+				XMLHttpRequestObject.send("param="+param);
+			}
+    }
+  </script>
+</head>
+<body>
+	<H1>An Ajax demo</H1>
+  <form>
+		<input type = "button" value = "Fetch message 1" onclick = "getData('week7d.php', 'targetDiv', '1')">
+		<input type = "button" value = "Fetch message 2" onclick = "getData('week7d.php', 'targetDiv', '2')">
+  </form>
+
+	<div id="targetDiv">
+		<p>The fetched message will appear here.</p>
+	</div>
+
+</body>
+</html>

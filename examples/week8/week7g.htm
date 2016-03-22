@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>week 7 example</title>
+
+	<script language = "javascript">
+
+		var reqObj = false;
+		if(window.XMLHttpRequest)
+			reqObj = new XMLHttpRequest();
+		else if(window.ActiveXObject)
+			reqObj = new ActiveXObject("Microsoft.XMLHTTP");
+
+		function getNames(url){
+			if(reqObj){
+				reqObj.open("GET", url);
+				reqObj.onreadystatechange = function(){
+					if(reqObj.readyState == 4 /* && reqObj.status == 200*/)
+						procXML(reqObj.responseXML);
+				}
+				reqObj.send(null);
+			}
+		}
+
+		function procXML(xmlData){
+			var stu=xmlData.getElementsByTagName("name");
+			var ulRef=document.getElementById("targetUl");
+			for(i=0; i<stu.length; i++){
+				var newLi=document.createElement('li');
+				newLi.appendChild(document.createTextNode(stu[i].firstChild.nodeValue));
+				ulRef.appendChild(newLi);
+			}
+		}
+
+  </script>
+</head>
+<body>
+	<H1>An Ajax demo</H1>
+  <form>
+		<input type = "button" value = "Get student names" onclick = "getNames('http://www.cis.gvsu.edu/~scrippsj/cs371/examples/week6.xml')">
+  </form>
+
+	<div>
+		<ul id="targetUl">
+		</ul>
+	</div>
+
+</body>
+</html>
