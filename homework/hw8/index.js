@@ -1,52 +1,33 @@
+
+var map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: {lat: 42.963918, lng: -85.888397 }
+    });
+}
+
 $(document).ready(function() {
 
   var userLocation = new Object();
   var markers = [];
-  var map;
-
-  // If you're adding a number of markers, you may want to drop them on the map
-  // consecutively rather than all at once. This example shows how to use
-  // window.setTimeout() to space your markers' animation.
-  var neighborhoods = [
-    {lat: 52.511, lng: 13.447},
-    {lat: 52.549, lng: 13.422},
-    {lat: 52.497, lng: 13.396},
-    {lat: 52.517, lng: 13.394}
-  ];
-
-  var markers = [];
-  var map;
-
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: {lat: 52.520, lng: 13.410}
-    });
-    drop();
-  }
+  var locations = [];
 
   function drop() {
-    clearMarkers();
-    for (var i = 0; i < neighborhoods.length; i++) {
-      addMarkerWithTimeout(neighborhoods[i], i * 200);
+    for (var i = 0; i < locations.length; i++) {
+      addMarkerWithTimeout(locations[i], i * 200);
     }
   }
 
   function addMarkerWithTimeout(position, timeout) {
     window.setTimeout(function() {
       markers.push(new google.maps.Marker({
-        position: position,
+        position: { lat: position.lat, lng: position.lng},
         map: map,
         animation: google.maps.Animation.DROP
       }));
     }, timeout);
-  }
-
-  function clearMarkers() {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
-    }
-    markers = [];
   }
 
   function newLocation(campus, latitude, longitude) {
@@ -57,7 +38,7 @@ $(document).ready(function() {
     return location;
   }
 
-  function setCampuses(locations) {
+  function setCampuses() {
     locations.push(newLocation("Allendale", 42.963918, -85.888397));
     locations.push(newLocation("Annis Water Resource Center", 43.233644, -86.259783));
     locations.push(newLocation("Cook-DeVos Center for Health Sciences", 42.970727, -85.661486));
@@ -93,12 +74,15 @@ $(document).ready(function() {
     return 7918 * Math.asin(Math.sqrt(a));
   }
 
-  function getDistances(locations) {
+  function getDistances() {
     var distances = []
     for (var index in locations) {
       var dist = distance(userLocation, locations[index]);
       distances.push({ distance: dist, location });
     }
+    distances.sort(function(a, b) {
+        return a.distance - b.distance;
+    });
     return distances;
   }
 
@@ -111,12 +95,18 @@ $(document).ready(function() {
     main();
   }
 
+  function makeTable(distances) {
+
+  }
+  
   function main() {
-    var locations = [];
-    setCampuses(locations);
-    var distances = getDistances(locations);
+    setCampuses();
+    var distances = getDistances();
+    makeTable(distances);
+    drop();
   }
 
   getLocation();
 
 })
+
