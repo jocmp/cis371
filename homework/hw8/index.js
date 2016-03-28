@@ -45,7 +45,7 @@ $(document).ready(function() {
     locations.push(newLocation("Detroit", 42.337508, -83.048052));
     locations.push(newLocation("Holland", 42.779597, -86.075288));
     locations.push(newLocation("Muskegon Regional Center", 43.248491, -86.193867));
-    locations.push(newLocation("Pew Campus", 42.964221, -85.677128));
+    locations.push(newLocation("Pew", 42.964221, -85.677128));
     locations.push(newLocation("Traverse City", 44.739785, -85.620594))
   }
 
@@ -53,7 +53,7 @@ $(document).ready(function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success);
     } else {
-        $("#title").append(
+        $("#title-container").append(
           "<p>Geolocation is not supported by this browser.</p>"
         );
     }
@@ -64,7 +64,7 @@ $(document).ready(function() {
     var lon1 = locationFrom.lng;
     var lat2 = locationTo.lat;
     var lon2 = locationTo.lng;
-
+    // Using the Haversine formula
     var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
     var a = 0.5 - c((lat2 - lat1) * p)/2 +
@@ -78,7 +78,7 @@ $(document).ready(function() {
     var distances = []
     for (var index in locations) {
       var dist = distance(userLocation, locations[index]);
-      distances.push({ distance: dist, location });
+      distances.push({ distance: dist, location: locations[index] });
     }
     distances.sort(function(a, b) {
         return a.distance - b.distance;
@@ -87,22 +87,27 @@ $(document).ready(function() {
   }
 
   function success(position) {
-    $("#title").append("Latitude: " + position.coords.latitude +
-      "<br>Longitude: " + position.coords.longitude
-    );
     userLocation.lat = position.coords.latitude;
     userLocation.lng = position.coords.longitude;
-    main();
+    run();
   }
 
   function makeTable(distances) {
-
+      var currentDistance = -1;
+      for (var index in distances) {
+          currentDist = distances[index].distance.toPrecision(4);
+          $("#dist-table").append(
+                "<tr><td>" + currentDist + " miles" + 
+                "</td><td>" + distances[index].location.campus + "</td></td>"
+                );
+      }
   }
   
-  function main() {
+  function run() {
     setCampuses();
     var distances = getDistances();
     makeTable(distances);
+    $(".title").html("geoLctr");
     drop();
   }
 
