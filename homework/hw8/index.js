@@ -21,12 +21,20 @@ $(document).ready(function() {
   }
 
   function addMarkerWithTimeout(position, timeout) {
+    var marker;
     window.setTimeout(function() {
-      markers.push(new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: { lat: position.lat, lng: position.lng},
+        content: position.campus,
         map: map,
         animation: google.maps.Animation.DROP
-      }));
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+          marker.infowindow = new google.maps.InfoWindow({
+              content: marker.content
+          }).open(map, marker);
+      });
+      markers.push(marker);
     }, timeout);
   }
 
