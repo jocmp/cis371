@@ -4,17 +4,31 @@ $(document).ready(function() {
   var markers = [];
   var map;
 
+  // If you're adding a number of markers, you may want to drop them on the map
+  // consecutively rather than all at once. This example shows how to use
+  // window.setTimeout() to space your markers' animation.
+  var neighborhoods = [
+    {lat: 52.511, lng: 13.447},
+    {lat: 52.549, lng: 13.422},
+    {lat: 52.497, lng: 13.396},
+    {lat: 52.517, lng: 13.394}
+  ];
+
+  var markers = [];
+  var map;
+
   function initMap() {
-    map = new google.maps.Map($('#map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
-      center: {lat: 42.963918, lng: -85.888397 }
+      center: {lat: 52.520, lng: 13.410}
     });
+    drop();
   }
 
-  function drop(locations) {
+  function drop() {
     clearMarkers();
-    for (var i = 0; i < locations.length; i++) {
-      addMarkerWithTimeout(locations[i], i * 200);
+    for (var i = 0; i < neighborhoods.length; i++) {
+      addMarkerWithTimeout(neighborhoods[i], i * 200);
     }
   }
 
@@ -28,6 +42,12 @@ $(document).ready(function() {
     }, timeout);
   }
 
+  function clearMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+    markers = [];
+  }
 
   function newLocation(campus, latitude, longitude) {
     var location = new Object();
@@ -94,7 +114,6 @@ $(document).ready(function() {
   function main() {
     var locations = [];
     setCampuses(locations);
-    drop(locations);
     var distances = getDistances(locations);
   }
 
